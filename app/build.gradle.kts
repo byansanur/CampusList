@@ -2,16 +2,18 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlinAndroidKsp)
+    alias(libs.plugins.hiltAndroid)
 }
 
 android {
     namespace = "com.byansanur.campuslist"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.byansanur.campuslist"
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -56,4 +58,22 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+
+    implementation(libs.ktor.android)
+    implementation(libs.ktor.core)
+    implementation(libs.ktor.serialization)
+    implementation(libs.ktor.logging)
+
+    implementation(libs.kotlin.coroutines)
+    implementation(libs.kotlin.coroutines.android)
+
+    implementation(libs.google.gson)
+
+    implementation(libs.room.runtime)
+    ksp(libs.room.compiler)
+//    annotationProcessor(libs.room.compiler)
+    implementation(libs.room.ktx)
 }
