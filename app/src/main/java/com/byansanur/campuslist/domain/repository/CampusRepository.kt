@@ -1,6 +1,6 @@
 package com.byansanur.campuslist.domain.repository
 
-import com.byansanur.campuslist.domain.Campus
+import com.byansanur.campuslist.domain.model.Campus
 
 interface CampusRepository {
     suspend fun getCampus(refresh: Boolean): List<Campus>
