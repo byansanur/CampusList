@@ -1,7 +1,7 @@
 package com.byansanur.campuslist.data.entity
 
 import com.byansanur.campuslist.data.local.entity.CampusEntity
-import com.byansanur.campuslist.domain.Campus
+import com.byansanur.campuslist.domain.model.Campus
 
 data class CampusModel(
     val id: Int = 0,

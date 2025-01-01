@@ -1,4 +1,4 @@
-package com.byansanur.campuslist.domain
+package com.byansanur.campuslist.domain.model
 
 import com.byansanur.campuslist.data.entity.CampusModel
 
