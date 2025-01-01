@@ -66,6 +66,8 @@ dependencies {
     implementation(libs.ktor.core)
     implementation(libs.ktor.serialization)
     implementation(libs.ktor.logging)
+    implementation(libs.ktor.content.negotiation)
+    implementation(libs.ktor.serialization.ktx)
 
     implementation(libs.kotlin.coroutines)
     implementation(libs.kotlin.coroutines.android)

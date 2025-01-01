@@ -34,7 +34,9 @@ hilt-android = { group = "com.google.dagger", name = "hilt-android" , version.re
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler" , version.ref = "hiltVersion"}
 ktor-android = { group = "io.ktor", name = "ktor-client-android", version.ref = "ktorVersion" }
 ktor-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktorVersion" }
+ktor-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktorVersion" }
 ktor-serialization = { group = "io.ktor", name = "ktor-client-serialization-jvm", version.ref = "ktorVersion" }
+ktor-serialization-ktx = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktorVersion" }
 ktor-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktorVersion" }
 kotlin-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutinesVersion" }
 kotlin-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutinesVersion" }
