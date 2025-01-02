@@ -23,3 +23,9 @@ class GetCampusByNameUseCase @Inject constructor(
     suspend operator fun invoke(name: String) =
         getCampusByName.getCampusByName(name)
 }
+
+class GetRecentSearchUseCase @Inject constructor(
+    private val getRecentSearch: DataRepository
+) {
+    suspend operator fun invoke() = getRecentSearch.getRecentSearch()
+}
