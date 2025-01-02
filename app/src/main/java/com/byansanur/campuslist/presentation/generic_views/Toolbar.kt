@@ -6,11 +6,11 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -24,14 +24,14 @@ fun CustomCenterToolbar(title: Int) {
             Text(
                 stringResource(title),
                 style = TextStyle(
-                    color = Color.White,
+                    color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.Bold,
                     fontSize = 21.sp
                 )
             )
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-            containerColor = Color.DarkGray
+            containerColor = MaterialTheme.colorScheme.background
         )
     )
 }
@@ -47,21 +47,21 @@ fun CustomToolbar(
             Text(
                 title,
                 style = TextStyle(
-                    color = Color.White,
+                    color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.Bold,
                     fontSize = 21.sp
                 )
             )
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-            containerColor = Color.DarkGray
+            containerColor = MaterialTheme.colorScheme.background
         ),
         navigationIcon = {
             IconButton(onClick = navigateBack) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = "Localized description",
-                    tint = Color.White
+                    tint = MaterialTheme.colorScheme.primary
                 )
             }
         }

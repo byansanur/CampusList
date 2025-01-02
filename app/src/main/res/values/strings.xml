@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Campus List</string>
     <string name="error">Error</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
+    <string name="recent_search">Recent Search</string>
+    <string name="oops_sorry">Oops… Sorry!</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="typo_search">Try searching with the correct campus name</string>
 </resources>

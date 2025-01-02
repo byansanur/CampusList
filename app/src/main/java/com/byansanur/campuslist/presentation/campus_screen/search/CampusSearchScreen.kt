@@ -2,7 +2,6 @@ package com.byansanur.campuslist.presentation.campus_screen.search
 
 import android.annotation.SuppressLint
 import android.util.Log
-import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,14 +15,16 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.byansanur.campuslist.R
 import com.byansanur.campuslist.domain.model.Campus
 import com.byansanur.campuslist.presentation.campus_screen.CampusViewModel
 import com.byansanur.campuslist.presentation.generic_views.CampusItemView
 import com.byansanur.campuslist.presentation.generic_views.CustomToolbar
+import com.byansanur.campuslist.presentation.generic_views.ShowDialog
 import com.byansanur.campuslist.presentation.navigation.Screens.CAMPUS_DETAILS_SCREEN
 import kotlinx.coroutines.flow.collectLatest
 
@@ -57,10 +58,6 @@ fun ListOfSearchCampus(
     searchKey: String,
     viewModel: CampusViewModel = hiltViewModel()
 ) {
-
-    val context = LocalContext.current
-
-
     val campuses by produceState<List<Campus>>(initialValue = emptyList(), key1 = searchKey) {
         if (searchKey.isNotEmpty()) {
             viewModel.searchCampus(searchKey).collectLatest { campusList ->
@@ -83,22 +80,34 @@ fun ListOfSearchCampus(
     Log.d("TAG", "ListOfSearchCampus: campuses: $campuses")
     if (campuses.isNotEmpty()) {
         // Display your list of campuses here
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues),
-            contentPadding = PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            items(campuses, key = {campus -> campus.name.toString()}) {
-                CampusItemView(campus = it) { selectedCampusDataValue ->
-                    Toast.makeText(
-                        context,
-                        selectedCampusDataValue.name.toString(),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    navController.navigate(CAMPUS_DETAILS_SCREEN + "/${selectedCampusDataValue.name}")
-                }
+        SearchOfList(paddingValues, navController, campuses)
+    } else {
+        ShowDialog(
+            title = stringResource(R.string.oops_sorry),
+            message = stringResource(R.string.typo_search),
+            onClickOk = {
+                navController.popBackStack()
+            }
+        )
+    }
+}
+
+@Composable
+fun SearchOfList(
+    paddingValues: PaddingValues,
+    navController: NavController,
+    campuses: List<Campus>
+) {
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(paddingValues),
+        contentPadding = PaddingValues(16.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        items(campuses, key = {campus -> campus.name.toString()}) {
+            CampusItemView(campus = it) { selectedCampusDataValue ->
+                navController.navigate(CAMPUS_DETAILS_SCREEN + "/${selectedCampusDataValue.name}")
             }
         }
     }

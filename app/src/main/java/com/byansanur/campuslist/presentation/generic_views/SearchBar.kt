@@ -14,6 +14,7 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
@@ -56,8 +57,8 @@ fun MySearchBar(
             .clip(RoundedCornerShape(20.dp))
             .border(
                 BorderStroke(
-                    1.dp,
-                    SolidColor(Color.White)
+                    3.dp,
+                    SolidColor(MaterialTheme.colorScheme.primary)
                 ),
                 RoundedCornerShape(20.dp)
             ),
@@ -107,9 +108,9 @@ fun MySearchBar(
                 fontWeight = FontWeight.Normal,
             ),
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                containerColor = Color.DarkGray,
-                focusedBorderColor = Color.DarkGray,
-                unfocusedBorderColor = Color.White,
+                containerColor = MaterialTheme.colorScheme.primary,
+                focusedBorderColor = MaterialTheme.colorScheme.primaryContainer,
+                unfocusedBorderColor = MaterialTheme.colorScheme.primaryContainer,
                 cursorColor = Color.White
 
             ),

@@ -19,6 +19,7 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -26,7 +27,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -58,7 +58,8 @@ fun StartDefaultLoader() {
 @Composable
 fun ShowDialog(
     title: String?,
-    message: String?
+    message: String?,
+    onClickOk: () -> Unit
 ) {
     val openDialog = remember { mutableStateOf(true) }
     if (openDialog.value)
@@ -67,6 +68,7 @@ fun ShowDialog(
             confirmButton = {
                 TextButton(onClick = {
                     openDialog.value = false
+                    onClickOk.invoke()
                 }) { Text(text = stringResource(id = R.string.ok)) }
             },
             title = { title?.let { Text(text = it) } },
@@ -94,7 +96,8 @@ fun CampusItemView(
                 listener(campus)
             },
         shape = RoundedCornerShape(9.dp),
-        colors = CardDefaults.cardColors(Color.DarkGray)
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant), // Opaque background
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
     ) {
         Row(
             modifier = Modifier
@@ -115,12 +118,13 @@ fun CampusItemView(
                     Text(
                         campus.name.toString(),
                         style = TextStyle(fontSize = 15.sp, textAlign = TextAlign.Left),
-                        color = Color.White,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.padding(bottom = 8.dp)
                     )
                     Text(
                         campus.country.toString(),
                         style = TextStyle(fontSize = 15.sp, textAlign = TextAlign.Left),
-                        color = Color.White,
+                        color = MaterialTheme.colorScheme.primary
                     )
                 }
             }
