@@ -1,6 +1,5 @@
 package com.byansanur.campuslist.presentation.campus_screen
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -42,15 +41,12 @@ class CampusViewModel @Inject constructor(
             return@flow // Early return to avoid unnecessary API call
         }
 
-        Log.e("TAG", "getSearchCampus: $name")
         try {
             _loading.postValue(true)
             val campusList = domainRepository.getSearchCampus(name, false)
-            Log.e("TAG", "searchCampus: $campusList", )
             emit(campusList) // Emit the fetched data
         } catch (exception: Exception) {
             _error.postValue(exception.message) // Update LiveData (if needed)
-            Log.e("Error", exception.message.toString())
             emit(emptyList()) // Emit an empty list on error
         } finally {
             _loading.postValue(false)
@@ -64,11 +60,9 @@ class CampusViewModel @Inject constructor(
         try {
             _loading.postValue(true)
             val campus = domainRepository.getCampusByName(name)
-            Log.e("TAG", "searchCampus: $campus", )
             campus?.let { emit(it) } // Emit the fetched data
         } catch (exception: Exception) {
             _error.postValue(exception.message) // Update LiveData (if needed)
-            Log.e("Error", exception.message.toString())
         } finally {
             _loading.postValue(false)
         }
@@ -78,11 +72,9 @@ class CampusViewModel @Inject constructor(
         try {
             _loading.postValue(true)
             val campusList = domainRepository.getRecentSearch()
-            Log.e("TAG", "searchCampus: $campusList", )
             emit(campusList) // Emit the fetched data
         } catch (exception: Exception) {
             _error.postValue(exception.message) // Update LiveData (if needed)
-            Log.e("Error", exception.message.toString())
             emit(emptyList()) // Emit an empty list on error
         } finally {
             _loading.postValue(false)

@@ -2,7 +2,6 @@ package com.byansanur.campuslist.presentation.campus_screen.detail
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
-import android.util.Log
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -90,7 +89,6 @@ fun WebViewPage(domain: String) {
             factory = { webView },
             update = {
                 val url = StringBuilder("https://$domain")
-                Log.d("TAG", "WebViewPage: url: $url")
                 it.loadUrl(url.toString())
             })
 
