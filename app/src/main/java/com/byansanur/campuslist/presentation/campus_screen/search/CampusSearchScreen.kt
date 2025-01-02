@@ -27,6 +27,7 @@ import com.byansanur.campuslist.presentation.generic_views.CustomToolbar
 import com.byansanur.campuslist.presentation.generic_views.ShowDialog
 import com.byansanur.campuslist.presentation.navigation.Screens.CAMPUS_DETAILS_SCREEN
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.runBlocking
 
 @Composable
 internal fun CampusSearchScreen(
@@ -50,7 +51,6 @@ internal fun CampusSearchScreen(
 }
 
 
-@SuppressLint("ProduceStateDoesNotAssignValue")
 @Composable
 fun ListOfSearchCampus(
     navController: NavController,
@@ -58,14 +58,13 @@ fun ListOfSearchCampus(
     searchKey: String,
     viewModel: CampusViewModel = hiltViewModel()
 ) {
-    val campuses by produceState<List<Campus>>(initialValue = emptyList(), key1 = searchKey) {
+    var campuses = mutableListOf<Campus>()
+    runBlocking {
         if (searchKey.isNotEmpty()) {
             viewModel.searchCampus(searchKey).collectLatest { campusList ->
                 Log.d("TAG", "ListOfSearchCampus: produceState: $campusList")
-                value = campusList
+                campuses.addAll(campusList)
             }
-        } else {
-            value = emptyList()
         }
     }
     val isLoading by viewModel.loading.observeAsState(initial = false)
