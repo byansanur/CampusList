@@ -1,5 +1,8 @@
-package com.byansanur.campuslist.domain.usecase
+package com.byansanur.campuslist.domain.repository
 
+import com.byansanur.campuslist.domain.usecase.GetCampusByNameUseCase
+import com.byansanur.campuslist.domain.usecase.GetCampusUseCase
+import com.byansanur.campuslist.domain.usecase.GetSearchCampusUseCase
 import javax.inject.Inject
 import javax.inject.Singleton
 
