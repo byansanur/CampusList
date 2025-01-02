@@ -1,5 +1,6 @@
 package com.byansanur.campuslist.data.network.di
 
+import android.util.Log
 import com.byansanur.campuslist.data.network.api.ApiServiceImpl
 import com.byansanur.campuslist.data.network.api.CampusApi
 import com.byansanur.campuslist.utils.Utils
@@ -12,8 +13,11 @@ import io.ktor.client.engine.android.Android
 import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
+import io.ktor.client.plugins.observer.ResponseObserver
 import io.ktor.client.request.header
+import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.serialization.kotlinx.json.json
@@ -31,13 +35,28 @@ class ApiModule {
         return HttpClient(Android){
             install(Logging){
                 level = LogLevel.ALL
+                logger = object : Logger {
+                    override fun log(message: String) {
+                        Log.d("KtorLogger", message) // Use Android Log
+                    }
+                }
             }
-            install(DefaultRequest){
+            install(DefaultRequest) {
                 url(Utils.BASE_URL)
                 header(HttpHeaders.ContentType, ContentType.Application.Json)
             }
             install(ContentNegotiation){
-                json(Json)
+                json(Json {
+                    ignoreUnknownKeys = true // Ignore unexpected keys in the JSON
+                    isLenient = true // Handle minor formatting issues in the JSON
+                    encodeDefaults = true // Include default values during serialization (optional)
+                })
+            }
+            install(ResponseObserver) {
+                onResponse { response ->
+                    val text = response.bodyAsText()
+                    Log.d("HttpResponse", "Raw Response: $text") // Log the raw response
+                }
             }
         }
     }
