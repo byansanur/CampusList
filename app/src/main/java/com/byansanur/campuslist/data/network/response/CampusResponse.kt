@@ -1,18 +1,22 @@
 package com.byansanur.campuslist.data.network.response
+
 import com.byansanur.campuslist.data.entity.CampusModel
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-
+@Serializable
 data class CampusResponse(
-    @SerializedName("alpha_two_code")
+    @SerialName("alpha_two_code")
     val alphaTwoCode: String? = "",
-    @SerializedName("country")
+    @SerialName("state-province")
+    val stateProvince: String? = "",
+    @SerialName("country")
     val country: String? = "",
-    @SerializedName("domains")
+    @SerialName("domains")
     val domains: List<String>? = listOf(),
-    @SerializedName("name")
-    val name: String? = "",
-    @SerializedName("web_pages")
+    @SerialName("name")
+    val name: String,
+    @SerialName("web_pages")
     val webPages: List<String>? = listOf()
 )
 

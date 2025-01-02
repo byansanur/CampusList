@@ -4,16 +4,14 @@ import com.byansanur.campuslist.data.local.entity.CampusEntity
 import com.byansanur.campuslist.domain.model.Campus
 
 data class CampusModel(
-    val id: Int = 0,
     val alphaTwoCode: String? = "",
     val country: String? = "",
     val domains: List<String>? = listOf(),
-    val name: String? = "",
+    val name: String,
     val webPages: List<String>? = listOf()
 )
 
 fun CampusModel.toLocal() = CampusEntity(
-    id = id,
     alphaTwoCode = alphaTwoCode,
     country = country,
     domains = domains,
@@ -22,7 +20,6 @@ fun CampusModel.toLocal() = CampusEntity(
 )
 
 fun CampusModel.toDomain() = Campus(
-    id = id,
     alphaTwoCode = alphaTwoCode,
     country = country,
     domains = domains,
