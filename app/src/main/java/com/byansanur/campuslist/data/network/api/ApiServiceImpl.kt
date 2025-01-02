@@ -1,7 +1,6 @@
 package com.byansanur.campuslist.data.network.api
 
 import com.byansanur.campuslist.data.network.response.CampusResponse
-import com.byansanur.campuslist.utils.Utils.BASE_URL
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.ResponseException

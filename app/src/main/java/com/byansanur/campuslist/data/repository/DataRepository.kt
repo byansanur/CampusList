@@ -4,13 +4,12 @@ import com.byansanur.campuslist.data.entity.toDomain
 import com.byansanur.campuslist.data.local.CampusLocalRepository
 import com.byansanur.campuslist.data.network.NetworkDataSource
 import com.byansanur.campuslist.domain.model.Campus
-import com.byansanur.campuslist.domain.repository.CampusRepository
 import com.byansanur.campuslist.domain.model.toLocal
+import com.byansanur.campuslist.domain.repository.CampusRepository
 import com.byansanur.campuslist.utils.flattenToList
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

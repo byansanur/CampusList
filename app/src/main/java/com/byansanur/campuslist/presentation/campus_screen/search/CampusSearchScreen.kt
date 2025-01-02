@@ -1,7 +1,5 @@
 package com.byansanur.campuslist.presentation.campus_screen.search
 
-import android.annotation.SuppressLint
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -62,7 +60,6 @@ fun ListOfSearchCampus(
     runBlocking {
         if (searchKey.isNotEmpty()) {
             viewModel.searchCampus(searchKey).collectLatest { campusList ->
-                Log.d("TAG", "ListOfSearchCampus: produceState: $campusList")
                 campuses.addAll(campusList)
             }
         }
@@ -76,7 +73,6 @@ fun ListOfSearchCampus(
     if(error != null){
         Text(text = error!!)
     }
-    Log.d("TAG", "ListOfSearchCampus: campuses: $campuses")
     if (campuses.isNotEmpty()) {
         // Display your list of campuses here
         SearchOfList(paddingValues, navController, campuses)

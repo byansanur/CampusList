@@ -1,7 +1,6 @@
 package com.byansanur.campuslist.presentation.campus_screen
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -138,10 +137,8 @@ fun ListOfCampuses(
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        Log.d("TAG", "ListOfCampuses: $listCampus")
         items(listCampus, key = { campus -> campus.name.toString() }) {
             CampusItemView(campus = it) { selectedCampusDataValue ->
-                Log.e("TAG", "ListOfCampuses: id: ${selectedCampusDataValue.name}")
                 navController.navigate(CAMPUS_DETAILS_SCREEN + "/${selectedCampusDataValue.name}")
             }
         }
@@ -162,7 +159,6 @@ fun RecentSearch(
     }
 
     if (recentSearchCampus.isNotEmpty()) {
-        Log.e("TAG", "RecentSearch: $recentSearchCampus")
         Column(
             modifier = Modifier.padding(PaddingValues(start = 16.dp))
         ) {
@@ -188,7 +184,6 @@ fun RecentSearch(
                     FilterChip(
                         selected = false,
                         onClick = {
-                            Log.e("TAG", "RecentSearch: ${item.name.toString()}")
                             navController.navigate(CAMPUS_DETAILS_SCREEN + "/${item.name}")
                         },
                         label = { Text(item.name.toString()) },
