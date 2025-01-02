@@ -1,7 +1,6 @@
 package com.byansanur.campuslist.data.repository
 
 import com.byansanur.campuslist.data.entity.toDomain
-import com.byansanur.campuslist.data.entity.toLocal
 import com.byansanur.campuslist.data.local.CampusLocalRepository
 import com.byansanur.campuslist.data.network.NetworkDataSource
 import com.byansanur.campuslist.domain.model.Campus
@@ -28,15 +27,11 @@ class DataRepository @Inject constructor(
         if (campusLocalList.isNotEmpty() &&  !refresh) {
             if (localRepo.isExpired()) {
                 getCampusFromRemote()
-                delay(200)
-                getCampusFromLocal()
             } else {
                 campusLocalList
             }
         } else {
             getCampusFromRemote()
-            delay(200)
-            getCampusFromLocal()
         }
     }
 
@@ -53,13 +48,27 @@ class DataRepository @Inject constructor(
         }
     }
 
-    override suspend fun getCampusByName(name: String): Campus = withContext(Dispatchers.IO) {
-        localRepo.getCampusByName(name).toDomain()
+    override suspend fun getRecentSearch(): List<Campus> = withContext(Dispatchers.IO) {
+        localRepo.getRecentSearch().map { it.toDomain() }
+    }
+
+    override suspend fun getCampusByName(name: String): Campus? = withContext(Dispatchers.IO) {
+        val recentSearch = getRecentSearchByName(name)
+        if (recentSearch == null) {
+            localRepo.getCampusByName(name).toDomain()
+        } else {
+            recentSearch
+        }
+    }
+
+    private suspend fun getRecentSearchByName(name: String): Campus? = withContext(Dispatchers.IO) {
+        localRepo.getCampusByRecentSearchName(name)?.toDomain()
     }
 
     private suspend fun getCampusBySearchFromLocal(name: String): List<Campus> = withContext(Dispatchers.IO) {
         localRepo.getCampusBySearch(name).map { it.toDomain() }
     }
+
 
     @OptIn(DelicateCoroutinesApi::class)
     private suspend fun getCampusBySearchFromRemote(name: String): List<Campus> {
@@ -69,7 +78,7 @@ class DataRepository @Inject constructor(
 
         if (collectedSearchCampuses.isNotEmpty())
             GlobalScope.launch(Dispatchers.IO) {
-                localRepo.insertCampus(collectedSearchCampuses.map { it.toLocal() })
+                localRepo.insertRecentSearch(collectedSearchCampuses.map { it.toLocal() })
             }
         else getCampusBySearchFromLocal(name)
 

@@ -6,6 +6,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import com.byansanur.campuslist.data.entity.CampusModel
 import com.byansanur.campuslist.data.entity.toLocal
+import com.byansanur.campuslist.data.entity.toLocalSearch
 import com.byansanur.campuslist.data.local.entity.toData
 import javax.inject.Singleton
 
@@ -31,10 +32,22 @@ class CampusLocalRepository @Inject constructor(
         campusDao.getCampusByName(name).toData()
     }
 
+    suspend fun getCampusByRecentSearchName(name: String) : CampusModel? = withContext(Dispatchers.IO) {
+        campusDao.getCampusByRecentSearchName(name)?.toData()
+    }
+
     suspend fun insertCampus(campus: List<CampusModel>) = withContext(Dispatchers.IO) {
         campusDao.insertCampus(campus.map { it.toLocal() })
         setLastCacheTime(System.currentTimeMillis())
+    }
 
+    suspend fun insertRecentSearch(campus: List<CampusModel>) = withContext(Dispatchers.IO) {
+        campusDao.insertRecentSearch(campus.map { it.toLocalSearch() })
+        setLastCacheTime(System.currentTimeMillis())
+    }
+
+    suspend fun getRecentSearch(): List<CampusModel> = withContext(Dispatchers.IO) {
+        campusDao.getRecentSearch().map { it.toData() }
     }
 
     private fun setLastCacheTime(lastCache: Long) {
