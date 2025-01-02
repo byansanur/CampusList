@@ -7,7 +7,9 @@ import javax.inject.Inject
 import com.byansanur.campuslist.data.entity.CampusModel
 import com.byansanur.campuslist.data.entity.toLocal
 import com.byansanur.campuslist.data.local.entity.toData
+import javax.inject.Singleton
 
+@Singleton
 class CampusLocalRepository @Inject constructor(
     private val campusDao: CampusDao,
     private val preferencesHelper: PreferenceHelpers
@@ -21,12 +23,15 @@ class CampusLocalRepository @Inject constructor(
         campusDao.getCampusList().map { it.toData() }
     }
 
-    suspend fun getCampusById(id: Int) : CampusModel = withContext(Dispatchers.IO) {
-        campusDao.getCampusById(id).toData()
+    suspend fun getCampusBySearch(name: String): List<CampusModel> = withContext(Dispatchers.IO) {
+        campusDao.getCampusBySearch(name).map { it.toData() }
+    }
+
+    suspend fun getCampusByName(name: String) : CampusModel = withContext(Dispatchers.IO) {
+        campusDao.getCampusByName(name).toData()
     }
 
     suspend fun insertCampus(campus: List<CampusModel>) = withContext(Dispatchers.IO) {
-        campusDao.deleteCampusList()
         campusDao.insertCampus(campus.map { it.toLocal() })
         setLastCacheTime(System.currentTimeMillis())
 

@@ -3,7 +3,9 @@ package com.byansanur.campuslist.data.local
 import android.content.Context
 import android.content.SharedPreferences
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class PreferenceHelpers @Inject constructor(context: Context) {
 
     companion object {
