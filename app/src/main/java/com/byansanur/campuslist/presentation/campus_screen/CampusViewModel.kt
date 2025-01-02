@@ -4,13 +4,11 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.byansanur.campuslist.domain.model.Campus
 import com.byansanur.campuslist.domain.repository.DomainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,24 +22,17 @@ class CampusViewModel @Inject constructor(
     val loading: LiveData<Boolean> get() = _loading
     val error: LiveData<String> get() = _error
 
-    private val _listCampus = MutableLiveData<List<Campus>>()
-    val listCampus: LiveData<List<Campus>> get() = _listCampus
 
-    init {
-        getCampuses()
-    }
-
-    private fun getCampuses(refresh: Boolean = false) {
-        viewModelScope.launch {
-            try {
-                _loading.value = true
-                _listCampus.value = domainRepository.getCampus(refresh)
-            } catch (exception: Exception) {
-                _loading.value = false
-                _error.value = exception.message
-            } finally {
-                _loading.value = false
-            }
+    fun getCampuses(refresh: Boolean = false): Flow<List<Campus>> = flow {
+        try {
+            _loading.value = true
+            val campus = domainRepository.getCampus(refresh)
+            emit(campus)
+        } catch (exception: Exception) {
+            _error.value = exception.message
+            emit(emptyList())
+        } finally {
+            _loading.value = false
         }
     }
 
@@ -74,10 +65,25 @@ class CampusViewModel @Inject constructor(
             _loading.postValue(true)
             val campus = domainRepository.getCampusByName(name)
             Log.e("TAG", "searchCampus: $campus", )
-            emit(campus) // Emit the fetched data
+            campus?.let { emit(it) } // Emit the fetched data
         } catch (exception: Exception) {
             _error.postValue(exception.message) // Update LiveData (if needed)
             Log.e("Error", exception.message.toString())
+        } finally {
+            _loading.postValue(false)
+        }
+    }
+
+    fun getRecentSearch(): Flow<List<Campus>> = flow {
+        try {
+            _loading.postValue(true)
+            val campusList = domainRepository.getRecentSearch()
+            Log.e("TAG", "searchCampus: $campusList", )
+            emit(campusList) // Emit the fetched data
+        } catch (exception: Exception) {
+            _error.postValue(exception.message) // Update LiveData (if needed)
+            Log.e("Error", exception.message.toString())
+            emit(emptyList()) // Emit an empty list on error
         } finally {
             _loading.postValue(false)
         }
