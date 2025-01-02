@@ -26,6 +26,7 @@ import com.byansanur.campuslist.domain.model.Campus
 import com.byansanur.campuslist.presentation.campus_screen.CampusViewModel
 import com.byansanur.campuslist.presentation.generic_views.CustomToolbar
 import com.byansanur.campuslist.presentation.generic_views.ShowDialog
+import com.byansanur.campuslist.utils.Utils.BASE_HTTPS
 import kotlinx.coroutines.runBlocking
 
 
@@ -88,7 +89,7 @@ fun WebViewPage(domain: String) {
             modifier = Modifier.fillMaxSize(),
             factory = { webView },
             update = {
-                val url = StringBuilder("https://$domain")
+                val url = StringBuilder("$BASE_HTTPS$domain")
                 it.loadUrl(url.toString())
             })
 

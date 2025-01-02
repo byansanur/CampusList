@@ -48,7 +48,7 @@ fun MySearchBar(
     LaunchedEffect(key1 = performSearch) {
         if (performSearch) {
             onSearchClicked(text)
-            performSearch = false // Reset the trigger
+            performSearch = false
         }
     }
     Box(

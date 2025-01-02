@@ -36,18 +36,18 @@ class CampusViewModel @Inject constructor(
     }
 
     fun searchCampus(name: String): Flow<List<Campus>> = flow {
-        if (name.isBlank()) { // Check for empty or blank search string
-            emit(emptyList()) // Emit an empty list for empty searches
-            return@flow // Early return to avoid unnecessary API call
+        if (name.isBlank()) {
+            emit(emptyList())
+            return@flow
         }
 
         try {
             _loading.postValue(true)
             val campusList = domainRepository.getSearchCampus(name, false)
-            emit(campusList) // Emit the fetched data
+            emit(campusList)
         } catch (exception: Exception) {
-            _error.postValue(exception.message) // Update LiveData (if needed)
-            emit(emptyList()) // Emit an empty list on error
+            _error.postValue(exception.message)
+            emit(emptyList())
         } finally {
             _loading.postValue(false)
         }
@@ -60,9 +60,9 @@ class CampusViewModel @Inject constructor(
         try {
             _loading.postValue(true)
             val campus = domainRepository.getCampusByName(name)
-            campus?.let { emit(it) } // Emit the fetched data
+            campus?.let { emit(it) }
         } catch (exception: Exception) {
-            _error.postValue(exception.message) // Update LiveData (if needed)
+            _error.postValue(exception.message)
         } finally {
             _loading.postValue(false)
         }
@@ -72,10 +72,10 @@ class CampusViewModel @Inject constructor(
         try {
             _loading.postValue(true)
             val campusList = domainRepository.getRecentSearch()
-            emit(campusList) // Emit the fetched data
+            emit(campusList)
         } catch (exception: Exception) {
-            _error.postValue(exception.message) // Update LiveData (if needed)
-            emit(emptyList()) // Emit an empty list on error
+            _error.postValue(exception.message)
+            emit(emptyList())
         } finally {
             _loading.postValue(false)
         }
