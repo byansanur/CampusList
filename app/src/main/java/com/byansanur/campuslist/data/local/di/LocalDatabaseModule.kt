@@ -3,6 +3,7 @@ package com.byansanur.campuslist.data.local.di
 import android.content.Context
 import androidx.room.Room
 import com.byansanur.campuslist.data.local.CampusDatabases
+import com.byansanur.campuslist.data.local.PreferenceHelpers
 import com.byansanur.campuslist.data.local.dao.CampusDao
 import dagger.Module
 import dagger.Provides
@@ -27,4 +28,9 @@ class LocalDatabaseModule {
 
     @Provides
     fun campusDao(database: CampusDatabases) : CampusDao = database.campusEntityDao()
+
+    @Provides
+    fun providePrefHelpers(@ApplicationContext context: Context) : PreferenceHelpers {
+        return PreferenceHelpers(context)
+    }
 }

@@ -9,7 +9,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class NetworkDataSource @Inject constructor(
     private val api: ApiServiceImpl
 ) {
@@ -26,7 +28,7 @@ class NetworkDataSource @Inject constructor(
 
     suspend fun getSearchCampus(search: String) : Flow<List<CampusModel>> = withContext(Dispatchers.IO) {
         api.getSearchCampus(
-            search = search,
+            name = search,
             country = MY_COUNTRY,
             limit = 10,
             offset = 0
