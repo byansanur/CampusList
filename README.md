@@ -45,7 +45,7 @@ The app uses the University Domains List API by Hipo Labs:
 1.  **Clone the repository:**
 
     ```bash
-    git clone https://github.com/byansanur/campus-list.git
+    git clone https://github.com/byansanur/CampusList.git
     ```
 
 2.  **Open the project:**
