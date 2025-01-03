@@ -23,3 +23,9 @@ Campus List is an Android application built with Kotlin that allows you to explo
     - Room or DataStore (Local Data Persistence)
 - Minimum SDK Version: 26
 - Target SDK Version: Latest stable version
+
+## API
+The app utilizes the University Domains List API by Hipo Labs (http://universities.hipolabs.com/search?country=indonesia) to retrieve university information. Documentation for the API is available here: https://github.com/Hipo/university-domains-list-api
+
+## Objective
+This project aims to showcase best practices in Android development by enhancing a simple university list application with various functionalities. It demonstrates the use of modern libraries and tools to create a robust and user-friendly experience.
