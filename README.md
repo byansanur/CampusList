@@ -1,5 +1,9 @@
-# Campus List: A Modern Android App for Exploring Universities
-Campus List is an Android application built with Kotlin that allows you to explore universities in Indonesia. This app provides a user-friendly interface for browsing university details, searching for specific universities, and even opening their websites within the app.
+# Campus List: Exploring Indonesian Universities
+
+**Campus List** is a modern Android application built with Kotlin, designed to help you explore universities across Indonesia. With a clean and intuitive interface, you can easily browse university details, search for specific institutions, and even visit their websites directly within the app.
+
+**Objective**
+This project aims to showcase best practices in Android development by enhancing a simple university list application with various functionalities. It demonstrates the use of modern libraries and tools to create a robust and user-friendly experience.
 
 <div style="display: flex; justify-content: space-around;">
   <img src="assets/screenshoot/home-light.jpeg" alt="Alt Text" title="Optional Title" style="width:300px; height:auto;">
@@ -7,25 +11,51 @@ Campus List is an Android application built with Kotlin that allows you to explo
 </div>
 
 ## Features
-- Beautiful UI: The app leverages Jetpack Compose to create a modern and visually appealing user interface.
-- Persistent University List: University data is saved locally using either Room or DataStore, ensuring a smooth and efficient experience even without internet access.
-- Search Functionality: Easily search for universities by name using the built-in search feature.
-- In-App Browser: Open university websites directly within the app for seamless navigation.
-- Unit Testing: Rigorous unit tests ensure the app's reliability and performance.
 
-## Technical Stack
-- Programming Language: Kotlin
-- Architecture: MVVM/MVI
-- Libraries & Tools:
-    - Kotlin Coroutines & Flow
-    - Jetpack Compose (UI)
-    - Hilt (Dependency Injection)
-    - Room or DataStore (Local Data Persistence)
-- Minimum SDK Version: 26
-- Target SDK Version: Latest stable version
+*   **Modern UI:** Built with Jetpack Compose for a smooth and visually appealing user experience.
+*   **Offline Access:** University data is stored locally using Room or DataStore, enabling access even without an internet connection.
+*   **Powerful Search:** Quickly find universities by name using the integrated search functionality.
+*   **In-App Browsing:** Open university websites directly within the app using an embedded browser.
+*   **Robust Testing:** Comprehensive unit tests ensure the app's stability and reliability.
+
+## Technologies
+
+*   **Language:** Kotlin
+*   **Architecture:** MVVM/MVI
+*   **UI:** Jetpack Compose
+*   **Dependency Injection:** Hilt
+*   **Local Persistence:** Room or DataStore
+*   **Coroutines & Flow:** Kotlin Coroutines & Flow
 
 ## API
-The app utilizes the University Domains List API by Hipo Labs (http://universities.hipolabs.com/search?country=indonesia) to retrieve university information. Documentation for the API is available here: https://github.com/Hipo/university-domains-list-api
+The app uses the University Domains List API by Hipo Labs:
 
-## Objective
-This project aims to showcase best practices in Android development by enhancing a simple university list application with various functionalities. It demonstrates the use of modern libraries and tools to create a robust and user-friendly experience.
+*   **API Endpoint:** [http://universities.hipolabs.com/search?country=indonesia](http://universities.hipolabs.com/search?country=indonesia)
+*   **API Documentation:** [https://github.com/Hipo/university-domains-list-api](https://github.com/Hipo/university-domains-list-api)
+
+## Installation
+
+**Prerequisites:**
+
+*   Android Studio (latest stable version): [Download Android Studio](https://developer.android.com/studio)
+*   Basic knowledge of Kotlin and Android development
+
+**Steps:**
+
+1.  **Clone the repository:**
+
+    ```bash
+    git clone https://github.com/byansanur/campus-list.git
+    ```
+
+2.  **Open the project:**
+
+    Open the cloned `campus-list` directory in Android Studio.
+
+3.  **Sync with Gradle:**
+
+    Click "File" -> "Sync Project with Gradle Files" to download project dependencies.
+
+4.  **Run the app:**
+
+    Click the "Run" button and select a connected device or emulator.
