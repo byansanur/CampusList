@@ -23,7 +23,7 @@ class LocalDatabaseModule {
             context.applicationContext,
             CampusDatabases::class.java,
             "campus.db"
-        ).build()
+        ).fallbackToDestructiveMigration().build()
     }
 
     @Provides
