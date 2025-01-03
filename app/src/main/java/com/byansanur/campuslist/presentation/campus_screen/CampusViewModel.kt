@@ -30,9 +30,16 @@ class CampusViewModel @Inject constructor(
         } catch (exception: Exception) {
             _error.value = exception.message
             emit(emptyList())
+            updateLivedataError(exception.message!!)
         } finally {
             _loading.value = false
         }
+    }
+
+    fun updateLivedataError(newValue: String) : LiveData<String> {
+        var mutableSt =  MutableLiveData<String>()
+        mutableSt.value = newValue
+        return mutableSt
     }
 
     fun searchCampus(name: String): Flow<List<Campus>> = flow {
