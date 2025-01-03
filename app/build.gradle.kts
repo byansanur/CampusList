@@ -42,8 +42,13 @@ android {
     }
 }
 
-dependencies {
+val mockitoAgent = configurations.create("mockitoAgent")
 
+tasks.withType<Test> {
+    jvmArgs("-javaagent:${mockitoAgent.singleFile}") // Use singleFile for JVM agent path
+}
+
+dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -52,11 +57,38 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+
+    // test
     testImplementation(libs.junit)
+    testImplementation(libs.mockito.test)
+    mockitoAgent(libs.mockito.test) { isTransitive = false }
+
+    androidTestImplementation(libs.arch.core.testing)
+    testImplementation(libs.arch.core.testing)
+
+    testImplementation(libs.hilt.testing)
+    androidTestImplementation(libs.hilt.testing)
+    kspAndroidTest(libs.hilt.testing.compiler)
+    kspTest(libs.hilt.testing.compiler)
+
+    androidTestImplementation(libs.room.test)
+    testImplementation(libs.room.test)
+
+    testImplementation(libs.kotlin.coroutines.test)
+
+    testImplementation(libs.ktor.test.mock)
+    testImplementation(libs.ktor.logging)
+    testImplementation(libs.ktor.serialization.ktx)
+    testImplementation(libs.ktor.content.negotiation)
+
+    testImplementation(libs.io.mockk)
+    testImplementation(libs.io.mockk.agent)
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
@@ -86,4 +118,8 @@ dependencies {
     implementation(libs.compose.runtime.livedata)
 
     implementation(libs.kotlin.serial)
+}
+
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
 }

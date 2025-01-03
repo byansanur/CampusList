@@ -15,8 +15,12 @@ ktorVersion = "3.0.3"
 coroutinesVersion = "1.7.3"
 gsonVersion = "2.11.0"
 roomVersion = "2.6.1"
+roomTestVersion = "2.6.1"
 composeNavigationVersion = "2.8.5"
 composeHiltNavigationVersion = "1.2.0"
+archCoreTestVersion = "2.2.0"
+mockitoVersion = "5.14.2"
+ioMockK = "1.13.14"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -38,20 +42,29 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 hilt-android = { group = "com.google.dagger", name = "hilt-android" , version.ref = "hiltVersion"}
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler" , version.ref = "hiltVersion"}
 hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "composeHiltNavigationVersion" }
+hilt-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hiltVersion" }
+hilt-testing-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hiltVersion" }
 ktor-android = { group = "io.ktor", name = "ktor-client-android", version.ref = "ktorVersion" }
 ktor-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktorVersion" }
 ktor-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktorVersion" }
 ktor-serialization = { group = "io.ktor", name = "ktor-client-serialization-jvm", version.ref = "ktorVersion" }
 ktor-serialization-ktx = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktorVersion" }
 ktor-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktorVersion" }
+ktor-test-mock = { group = "io.ktor", name = "ktor-client-mock", version.ref = "ktorVersion" }
 kotlin-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutinesVersion" }
 kotlin-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutinesVersion" }
 kotlin-serial = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "coroutinesVersion" }
+kotlin-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutinesVersion" }
 google-gson = { group = "com.google.code.gson", name = "gson", version.ref = "gsonVersion" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomVersion" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomVersion" }
+room-test = { group = "androidx.room", name = "room-testing", version.ref = "roomTestVersion" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomVersion" }
 android-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "composeNavigationVersion" }
+arch-core-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "archCoreTestVersion" }
+mockito-test = { group = "org.mockito", name = "mockito-core", version.ref = "mockitoVersion" }
+io-mockk = { group = "io.mockk", name = "mockk-android", version.ref = "ioMockK" }
+io-mockk-agent = { group = "io.mockk", name = "mockk-agent", version.ref = "ioMockK" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
